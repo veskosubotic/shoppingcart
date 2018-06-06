@@ -1,0 +1,13 @@
+<form class="d-flex justify-content-center" action="/articles/edit/<%= article.id %>" method="POST">
+  <div id="login-form" class="form-group">
+    <h2 class="form-signin-heading text-center font-style">Edit Product</h2>
+    <label for="title" class="mt-3">Product Name</label>
+    <input type="text" name="title" class="form-control" value="<%= article.title %>" required autofocus>
+    <input type="hidden" name="author" class="form-control" value="<%= article.author %>" required>
+    <label for="message" class="mt-3">Description</label>
+    <textarea class="form-control" name="message"><%= article.message %></textarea>
+    <label for="price" class="mt-3">Price</label>
+    <input type="text" class="form-control" name="price" value="<%= article.price %>">
+    <button class="btn btn-lg btn-primary btn-block mt-3" type="submit">Save</button>
+  </div>
+</form>

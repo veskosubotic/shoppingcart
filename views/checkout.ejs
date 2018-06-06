@@ -1,0 +1,10 @@
+<form action="/charge" method="POST">
+  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="pk_test_HAaIYKAgMkQ8bS3OUJOoOPxh" data-amount="" data-name="Web Development Ebook" data-description="Ebook written by writer" data-image="/img/marketplace.png" data-locale="auto"
+    data-shipping-address="true" data-email="<%= email %>">
+  </script>
+  <script>
+    // Hide default stripe button
+    document.getElementsByClassName('stripe-button-el')[0].style.display = 'none';
+  </script>
+  <button type="submit" class="btn btn-outline-dark text-white btn-lg" name="button">Purchase For $<%= total %></button>
+</form>

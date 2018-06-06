@@ -1,0 +1,76 @@
+<h1 class="font-style">Product Details</h1>
+<hr>
+<div id="product-details" class="row shadow-sm mt-5">
+  <div class="col-md-6 col-lg-6" style="height: 430px; padding: 0;">
+    <img class="img-responsive" src="/uploads/<%= article.imgPath %>" alt="">
+  </div>
+  <div class="col-md-6 col-lg-6">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <h5 class="font-p-style"><strong>Product Name:</strong>
+          <%= article.title %>
+        </h5>
+      </li>
+      <li class="list-group-item">
+        <h5 class="font-p-style">
+          <strong>Description:</strong>
+          <%= article.message %>
+        </h5>
+      </li>
+      <%var array = [];%>
+        <% rating.forEach(function(ratings){%>
+          <% var b = ratings.rating %>
+            <% var a = array.push(ratings.rating); %>
+              <% }) %>
+                <% if (array == ''){%>
+                  <li class="list-group-item">
+                    <h5 class="font-p-style"><strong>Rating:</strong>
+                <i class="far fa-star star-color"></i><i class="far fa-star star-color"></i><i class="far fa-star star-color"></i><i class="far fa-star star-color"></i><i class="far fa-star star-color"></i>
+                </h5>
+                  </li>
+                  <%}else{%>
+                    <% var sum = array.reduce(function(acc, val) { return acc + val; });%>
+                      <% var avg = Math.ceil(sum / count); %>
+                        <li class="list-group-item">
+                          <h5 class="font-p-style">
+            <strong>Rating:</strong>
+            <% if(avg == 1){ %>
+              <i class="fas fa-star star-color"></i><i class="far fa-star star-color"></i><i class="far fa-star star-color"></i><i class="far fa-star star-color"></i><i class="far fa-star star-color"></i>
+              <% } %>
+              <% if(avg == 2){ %>
+                <i class="fas fa-star star-color"></i><i class="fas fa-star star-color"></i><i class="far fa-star star-color"></i><i class="far fa-star star-color"></i><i class="far fa-star star-color"></i>
+                <% } %>
+                <% if(avg == 3){ %>
+                  <i class="fas fa-star star-color"></i><i class="fas fa-star star-color"></i><i class="fas fa-star star-color"></i><i class="far fa-star star-color"></i><i class="far fa-star star-color"></i>
+                  <% } %>
+                  <% if(avg == 4){ %>
+                    <i class="fas fa-star star-color"></i><i class="fas fa-star star-color"></i><i class="fas fa-star star-color"></i><i class="fas fa-star star-color"></i><i class="far fa-star star-color"></i>
+                    <% } %>
+                    <% if(avg == 5){ %>
+                      <i class="fas fa-star star-color"></i><i class="fas fa-star star-color"></i><i class="fas fa-star star-color"></i><i class="fas fa-star star-color"></i><i class="fas fa-star star-color"></i>
+                      <% } %>
+
+                      </h5>
+                        </li>
+                        <%}%>
+                          <% if (isAuthenticated){ %>
+                            <li class="list-group-item">
+                              <h5 class="font-p-style">
+                          <strong>Rate This Product:</strong>
+                            <div class="rating">
+                            <span onclick="location='http://localhost:3000/articles/article/<%= article.id %>/5'"><i class="far fa-star star-color"></i></span><span onclick="location='http://localhost:3000/articles/article/<%= article.id %>/4'"><i class="far fa-star star-color"></i></span><span onclick="location='http://localhost:3000/articles/article/<%= article.id %>/3'"><i class="far fa-star star-color"></i></span>
+                            <span onclick="location='http://localhost:3000/articles/article/<%= article.id %>/2'"><i class="far fa-star star-color"></i></span><span onclick="location='http://localhost:3000/articles/article/<%= article.id %>/1'"><i class="far fa-star star-color"></i></span>
+                            </div>
+                          </h5>
+                            </li>
+                            <%}%>
+                              <li class="list-group-item">
+                                <% if (userloggedin && userloggedin.username == 'vesko'){ %>
+                                  <a href="/articles/edit/<%= article.id %>" class="btn btn-primary">Edit Product</a>
+                                  <a href="#" class="btn btn-danger delete-article" data-id="<%= article.id %>">Delete Product</a>
+                                  <% } %>
+                                    <a href="/articles/article/<%= article.id %>/add-to-cart/<%= article.id %>" class="btn btn-primary">Add to Cart</a>
+                              </li>
+    </ul>
+  </div>
+</div>

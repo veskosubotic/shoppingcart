@@ -1,0 +1,27 @@
+<div class="pricing-header px-3 py-3 pt-md-3 pb-md-4 mx-auto text-center">
+  <h1 class="display-4 font-style">Shop Items Now</h1>
+  <p class="lead font-p-style">Quickly build an effective pricing table for your potential customers with this Bootstrap example. It's built with default Bootstrap components and utilities with little customization.</p>
+</div>
+
+<div class="card-deck mb-3 text-center">
+  <% articles.forEach(function(article){ %>
+    <div class="col-sm-12 col-md-4 col-lg-4">
+      <div class="card mb-4 shadow-sm">
+        <div class="card-header">
+          <h4 class="my-0 font-weight-normal font-p-style"><%= article.title%></h4>
+        </div>
+        <div class="card-body">
+          <h1 class="card-title pricing-card-title">$<%= article.price %></h1>
+          <ul class="list-unstyled mt-3 mb-4">
+            <li>10 users included</li>
+            <li>2 GB of storage</li>
+            <li>Email support</li>
+            <li>Help center access</li>
+          </ul>
+          <a type="button" href="/articles/article/<%= article.id %>" class="btn btn-lg btn-block btn-outline-primary">View Details</a>
+          <a type="button" href="/add-to-cart/<%= article.id %>" class="btn btn-lg btn-block btn-primary">Add to Cart</a>
+        </div>
+      </div>
+    </div>
+    <%})%>
+</div>

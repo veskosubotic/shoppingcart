@@ -1,0 +1,15 @@
+<form class="d-flex justify-content-center" action="/articles/add/article" method="POST" enctype="multipart/form-data">
+  <div id="login-form" class="form-group">
+    <h1 class="form-signin-heading text-center font-style">Add Product</h1>
+    <label for="inputTitle" class="mt-3">Title</label>
+    <input type="text" id="inputTitle" name="title" class="form-control" required autofocus>
+    <input type="hidden" name="author" value="<%= user_id %>">
+    <label for="inputDescription" class="mt-3">Description</label>
+    <textarea id="inputDescription" name="message" class="form-control" required></textarea>
+    <label for="inputPrice" class="mt-3">Price</label>
+    <input type="text" id="inputPrice" name="price" class="form-control" required>
+    <label for="inputImage" class="mt-3">Image</label>
+    <input type="file" id="inputImage" name="imgPath" class="form-control" required>
+    <button class="btn btn-lg btn-primary btn-block mt-3" type="submit">Add Product</button>
+  </div>
+</form>

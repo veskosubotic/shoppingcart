@@ -1,0 +1,97 @@
+<div class="row">
+  <div class="col-sm-12 col-md-4 col-lg-5">
+    <h1 class="font-style">My Profile</h1>
+    <hr>
+    <div class="card mt-4 text-center">
+      <img class="card-img-top shadow-sm" src="https://blacksaildivision.com/wp-content/uploads/2015/03/centos-users-and-groups-624x390.jpg" alt="Card image cap">
+      <div class="card-body shadow-sm">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><strong>Name:</strong>
+            <%= user.username %>
+          </li>
+          <li class="list-group-item"><strong>Email:</strong>
+            <%= user.email %>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <% if (orders){ %>
+    <div class="col-md-8 col-lg-7">
+      <h1 class="font-style margin-top">My Orders</h1>
+      <hr>
+      <div class="card mt-4 shadow-sm">
+        <div class="card-header" id="headingOne">
+          <h5 class="mb-0">
+        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+          Click here to show/hide orders
+        </button>
+      </h5>
+        </div>
+
+        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+          <div class="card-body px-0 py-0">
+            <div class="row mr-0 ml-0" id="shopping">
+              <div class="col-sm-12 col-md-12 px-0">
+                <div class="row bg-light mr-0 ml-0">
+                  <div class="col-sm-2 col-md-2 col-md-offset-2 col-sm-offset-2">
+                    <p>Image</p>
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-md-offset-3 col-sm-offset-3">
+                    <p>Product Title</p>
+                  </div>
+                  <div class="col-sm-2 col-md-2 col-md-offset-2 col-sm-offset-2">
+                    <p>Quantity</p>
+                  </div>
+                  <div class="col-sm-2 col-md-2 col-md-offset-2 col-sm-offset-2">
+                    <p>Price</p>
+                  </div>
+                  <div class="col-sm-2 col-md-2 col-md-offset-2 col-sm-offset-2">
+                    <p>Total</p>
+                  </div>
+                  <div class="col-sm-1 col-md-1 col-md-offset-1 col-sm-offset-1">
+                    <p></p>
+                  </div>
+                </div>
+                <% orders.forEach(function(order){ %>
+                  <% order.items.forEach(function(item){ %>
+                    <div class="row mt-2 mb-2">
+                      <div class="col-sm-2 col-md-2 col-md-offset-2 col-sm-offset-2">
+                      </div>
+                      <div class="col-sm-3 col-md-3 col-md-offset-3 col-sm-offset-3">
+                        <p><strong><%= item.item.title %></strong></p>
+                      </div>
+                      <div class="col-sm-2 col-md-2 col-md-offset-2 col-sm-offset-2">
+                        <p>
+                          <%= item.qty %>
+                        </p>
+                      </div>
+                      <div class="col-sm-2 col-md-2 col-md-offset-2 col-sm-offset-2">
+                        <p>$
+                          <%=item.item.price %>
+                      </div>
+                      <div class="col-sm-2 col-md-2 col-md-offset-2 col-sm-offset-2">
+                        <p>$
+                          <%=item.price %>
+                        </p>
+                      </div>
+                      <div class="col-sm-1 col-md-1 col-md-offset-1 col-sm-offset-1">
+                      </div>
+                    </div>
+                    <hr>
+                    <%})%>
+                      <%})%>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+<%} else{%>
+  <div class="row">
+    <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+      <h2>No Items in Cart</h2>
+    </div>
+  </div>
+  <%}%>

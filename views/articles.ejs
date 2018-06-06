@@ -1,0 +1,60 @@
+<h1 class="font-style">All Products</h1>
+<hr>
+<div class="row text-center mt-5">
+  <% products.forEach(function(article){ %>
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+      <div class="card mb-4 shadow-sm">
+        <div class="card-header">
+          <h4 class="my-0 font-weight-normal"><%= article.title%></h4>
+        </div>
+        <div class="card-body">
+          <h1 class="card-title pricing-card-title">$<%= article.price %></h1>
+          <ul class="list-unstyled mt-3 mb-4">
+            <li>10 users included</li>
+            <li>2 GB of storage</li>
+            <li>Email support</li>
+            <li>Help center access</li>
+          </ul>
+          <a type="button" href="/articles/article/<%= article.id %>" class="btn btn-lg btn-block btn-outline-primary">View Details</a>
+          <a type="button" href="/articles/page/<%= current %>/add-to-cart/<%= article.id %>" class="btn btn-lg btn-block btn-primary">Add to Cart</a>
+        </div>
+      </div>
+    </div>
+    <%})%>
+</div>
+<% if (pages > 0) { %>
+  <ul class="pagination text-center justify-content-center">
+    <% if (current == 1) { %>
+      <li class="page-item disabled shadow-sm"><a class="page-link">First</a></li>
+      <% } else { %>
+        <li class="page-item shadow-sm"><a class="page-link" href="/articles/page/1">First</a></li>
+        <% } %>
+          <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+            <% if (i !== 1) { %>
+              <li class="page-item disabled shadow-sm"><a class="page-link">...</a></li>
+              <% } %>
+                <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+                  <% if (i == current) { %>
+                    <li class="page-item active shadow-sm">
+                      <a class="page-link">
+                        <%= i %>
+                      </a>
+                    </li>
+                    <% } else { %>
+                      <li class="page-item shadow-sm">
+                        <a class="page-link" href="/articles/page/<%= i %>">
+                          <%= i %>
+                        </a>
+                      </li>
+                      <% } %>
+                        <% if (i == Number(current) + 4 && i < pages) { %>
+                          <li class="page-item disabled shadow-sm"><a class="page-link">...</a></li>
+                          <% } %>
+                            <% } %>
+                              <% if (current == pages) { %>
+                                <li class="page-item disabled shadow-sm"><a class="page-link">Last</a></li>
+                                <% } else { %>
+                                  <li class="page-item shadow-sm"><a class="page-link" href="/articles/page/<%= pages %>">Last</a></li>
+                                  <% } %>
+  </ul>
+  <% } %>

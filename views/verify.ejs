@@ -1,0 +1,10 @@
+<form id="verify-email" class="form-signin" action="/users/verify/:<%=secretToken%>" method="POST">
+  <h2 class="form-signin-heading">Verify your email</h2>
+
+  <label for="inputEmail" class="sr-only">Secret Token</label>
+  <input type="text" id="secretToken" name="secretToken" class="form-control" value="<%= secretToken %>" required autofocus>
+
+  <br/>
+
+  <button class="btn btn-lg btn-default btn-block" type="submit">Verify</button>
+</form>

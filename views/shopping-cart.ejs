@@ -1,0 +1,130 @@
+<% if (session.cart){ %>
+  <div class="pricing-header px-3 pt-md-3 pb-md-4 text-center">
+    <h1 class="display-4 font-style"><i class="fa fa-shopping-cart mr-3"></i>Shopping Cart</h1>
+    <p class="lead font-p-style">There
+      <% if (session.cart.totalQty > 1){ %> are
+        <%} else{%> is
+          <%}%>
+            <%= session.cart.totalQty %>
+              <% if (session.cart.totalQty > 1){%> products
+                <%}else{%>product
+                  <%}%> in your shopping cart
+    </p>
+  </div>
+  <%}%>
+    <% if (articles){ %>
+      <div class="row shadow-sm" id="shopping">
+        <div class="col-sm-12 col-md-12">
+          <div class="row bg-light">
+            <div class="col-sm-2 col-md-2 col-md-offset-2 col-sm-offset-2">
+              <p>Image</p>
+            </div>
+            <div class="col-sm-2 col-md-3 col-md-offset-3 col-sm-offset-3">
+              <p>Product Title</p>
+            </div>
+            <div class="col-sm-3 col-md-2 col-md-offset-2 col-sm-offset-2">
+              <p>Quantity</p>
+            </div>
+            <div class="col-sm-2 col-md-2 col-md-offset-2 col-sm-offset-2">
+              <p>Price</p>
+            </div>
+            <div class="col-sm-2 col-md-2 col-md-offset-2 col-sm-offset-2">
+              <p>Total</p>
+            </div>
+            <div class="col-sm-1 col-md-1 col-md-offset-1 col-sm-offset-1">
+              <p></p>
+            </div>
+          </div>
+          <% articles.forEach(function(article, key, array){ %>
+            <% if (Object.is(array.length - 1, key)){ %>
+              <div class="row mt-2 mb-2">
+                <div class="col-sm-2 col-md-2 col-md-offset-2 col-sm-offset-2">
+                  <img class="img-fluid" src="/uploads/<%= article.item.imgPath %>">
+                </div>
+                <div class="col-sm-2 col-md-3 col-md-offset-3 col-sm-offset-3">
+                  <p><strong><%= article.item.title %></strong>
+                    <br>
+                    <%= article.item.message %>
+                  </p>
+                </div>
+                <div class="col-sm-3 col-md-2 col-md-offset-2 col-sm-offset-2">
+                  <p>
+                    <%= article.qty %>
+                      <a href="/increase/<%= article.item._id %>"><i class="fa fa-chevron-up" title="Increase quantity"></i></a>
+                      <a href="/reduce/<%= article.item._id %>"><i class="fa fa-chevron-down" title="Decrease quantity"></i></a>
+                  </p>
+                </div>
+                <div class="col-sm-2 col-md-2 col-md-offset-2 col-sm-offset-2">
+                  <p>$
+                    <%=article.item.price %>
+                </div>
+                <div class="col-sm-2 col-md-2 col-md-offset-2 col-sm-offset-2">
+                  <p>$
+                    <%=article.price %>
+                  </p>
+                </div>
+                <div class="col-sm-1 col-md-1 col-md-offset-1 col-sm-offset-1">
+                  <p><a href="/remove/<%= article.item._id %>"><i class="fa fa-times" title="Remove Product"></i></a>
+                    <p>
+                </div>
+              </div>
+
+              <% }else{ %>
+                <div class="row mt-2 mb-2">
+                  <div class="col-sm-2 col-md-2 col-md-offset-2 col-sm-offset-2">
+                    <img class="img-fluid" src="/uploads/<%= article.item.imgPath %>">
+                  </div>
+                  <div class="col-sm-2 col-md-3 col-md-offset-3 col-sm-offset-3">
+                    <p><strong><%= article.item.title %></strong>
+                      <br>
+                      <%= article.item.message %>
+                    </p>
+                  </div>
+                  <div class="col-sm-3 col-md-2 col-md-offset-2 col-sm-offset-2">
+                    <p>
+                      <%= article.qty %>
+                        <a href="/increase/<%= article.item._id %>"><i class="fa fa-chevron-up" title="Increase quantity"></i></a>
+                        <a href="/reduce/<%= article.item._id %>"><i class="fa fa-chevron-down" title="Decrease quantity"></i></a>
+                    </p>
+                  </div>
+                  <div class="col-sm-2 col-md-2 col-md-offset-2 col-sm-offset-2">
+                    <p>$
+                      <%=article.item.price %>
+                  </div>
+                  <div class="col-sm-2 col-md-2 col-md-offset-2 col-sm-offset-2">
+                    <p>$
+                      <%=article.price %>
+                    </p>
+                  </div>
+                  <div class="col-sm-1 col-md-1 col-md-offset-1 col-sm-offset-1">
+                    <p><a href="/remove/<%= article.item._id %>"><i class="fa fa-times" title="Remove Product"></i></a>
+                      <p>
+                  </div>
+                </div>
+                <hr>
+                <%}})%>
+        </div>
+      </div>
+      <div class="row justify-content-end mt-4">
+        <div class="col-12 col-sm-4 col-md-auto col-md-offset-2 col-sm-offset-2 btn-center">
+          <button type="button" class="btn btn-outline-dark text-dark btn-lg" disabled><strong>Total Price:$<%= totalPrice %></strong></button>
+        </div>
+        <div class="col-12 col-sm-6 col-md-auto col-md-offset-2 col-sm-offset-2 btn-center">
+          <form action="/charge" method="POST">
+            <script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="pk_test_HAaIYKAgMkQ8bS3OUJOoOPxh" data-amount="" data-name="Shopping Cart" data-description="Some description" data-image="/img/marketplace.png" data-locale="auto" data-shipping-address="true"
+              data-email="<%= email %>">
+            </script>
+            <script>
+              // Hide default stripe button
+              document.getElementsByClassName('stripe-button-el')[0].style.display = 'none';
+            </script>
+            <button type="submit" class="btn btn-primary text-white btn-lg" name="button">Purchase For $<%= totalPrice %></button>
+          </form>
+        </div>
+      </div>
+      <%} else if(session.cart == undefined){%>
+        <div class="pricing-header px-3 pt-md-3 pb-md-4 text-center">
+          <h1 class="display-4 font-style"><i class="fa fa-shopping-cart mr-3"></i>Shopping Cart</h1>
+          <p class="font-p-style">Shopping Cart is empty</p>
+        </div>
+        <%}%>
